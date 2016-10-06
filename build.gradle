@@ -4,7 +4,7 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 group 'com.bitsfromspace'
-version '1.0-SNAPSHOT'
+version '1.01-SNAPSHOT'
 
 ext.credentials = new Properties();
 credentials.load(file(System.getProperty('user.home') + '/.gradle.credentials').newReader())

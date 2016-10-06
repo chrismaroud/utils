@@ -1,6 +1,7 @@
 package com.bitsfromspace.utils;
 
 import java.util.concurrent.Callable;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static com.bitsfromspace.utils.LogUtils.error;
@@ -24,6 +25,22 @@ public interface ExceptionUtils {
             action.invoke();
         } catch (Exception ex){
             throw new RuntimeException(ex);
+        }
+    }
+
+    static void tryCatch(Runnable runnable, Consumer<Throwable> catchHandler) {
+        try {
+            runnable.run();
+        } catch (Throwable t) {
+            catchHandler.accept(t);
+        }
+    }
+
+    static <T> T tryCatch(Callable<T> runnable, Function<Throwable, T> catchHandler) {
+        try {
+            return runnable.call();
+        } catch (Throwable t) {
+            return catchHandler.apply(t);
         }
     }
 

@@ -28,9 +28,9 @@ public interface ExceptionUtils {
         }
     }
 
-    static void tryCatch(Runnable runnable, Consumer<Throwable> catchHandler) {
+    static void tryCatch(Action runnable, Consumer<Throwable> catchHandler) {
         try {
-            runnable.run();
+            runnable.invoke();
         } catch (Throwable t) {
             catchHandler.accept(t);
         }
